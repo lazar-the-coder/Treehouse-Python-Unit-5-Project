@@ -4,7 +4,7 @@
     <section class="header">
         <h1>Python Developer</h1>
         <p>A short one-liner about your love of coding.</p>
-        <img src="https://cdn.pixabay.com/photo/2016/11/29/13/14/attractive-1869761_1280.jpg" alt="Headshot of myself">
+        <img src="{{ url_for('index') }}#images/index_self.jpg" alt="Headshot of myself">
     </section>
     <section id="about">
         <h2>About Me</h2>
@@ -36,16 +36,16 @@
         <div id="project-list">
             {% for project in projects %}
                 <div id="{{ project.id }}" class="a-project">
-                    <h3>{{ project.title }}</h3>
+                    <a href="{{ url_for('view', id=project.id) }}"><h3>{{ project.title }}</h3></a>
                     <a href="{{ project.link }}" class="github-btn">
                         <i class="fab fa-github"></i>
                         View on GitHub
                     </a>
                     <p>
-                        {{ project.description }}
+                        {{ project.skills }}
                     </p>
                     <p>
-                        {{ project.skills }}
+                        {{ project.description if project.description|length <= 30 else (project.description[:30] + "...") }}
                     </p>
                 </div>
             {% endfor %}
